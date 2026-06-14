@@ -50,31 +50,31 @@ The system consists of:
 ```mermaid
 flowchart TD
     subgraph Inputs
-        A[Job Description\n(JD JSON)] -->|Parsed| B[Python Backend]
-        C[Candidate Profiles\n(CSV)] -->|Loaded| B
+        A[JD JSON] -->|Parsed| B[Python Backend]
+        C[CSV Profiles] -->|Loaded| B
     end
 
-    subgraph Backend["Python Backend (FastAPI)"]
-        B --> D[1. JD Embedding\n(BGE-small-en-v1.5)]
-        B --> E[2. Candidate Embedding\n(BGE-small-en-v1.5)]
-        D --> F[Qdrant\n(Semantic Search)]
+    subgraph Backend["Python Backend"]
+        B --> D[JD Embedding]
+        B --> E[Candidate Embedding]
+        D --> F[Qdrant]
         E --> F
-        F --> G[Top-500 Candidates\n(FAISS/ANN)]
-        G --> H[Feature Engineering\n(Career Depth, Behavioral Signals)]
-        H --> I[Composite Scoring\n(XGBoost/Weighted Sum)]
-        I --> J[Ranked Output\n(CSV)]
+        F --> G[Top-500 Candidates]
+        G --> H[Feature Engineering]
+        H --> I[Composite Scoring]
+        I --> J[Ranked CSV]
     end
 
-    subgraph Frontend["Godot 4 Frontend"]
-        J --> K[FastAPI Bridge\n(HTTP Requests)]
-        K --> L[Quest Board\n(Adventurer Cards)]
-        K --> M[Dungeon Map\n(5-Room Pipeline)]
+    subgraph Frontend["Godot 4"]
+        J --> K[FastAPI Bridge]
+        K --> L[Quest Board]
+        K --> M[Dungeon Map]
     end
 
     subgraph Outputs
-        L --> N[Recruiter UI\n(Interactive Ranking)]
+        L --> N[Recruiter UI]
         M --> N
-        J --> O[ranked_output.csv\n(Top 100 Candidates)]
+        J --> O[ranked_output.csv]
     end
 
     style A fill:#f9f,stroke:#333
