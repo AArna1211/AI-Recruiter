@@ -1,0 +1,150 @@
+# ============
+# Python
+# ============
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE (PyCharm, VSCode, etc.)
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.pydevproject
+.nbproject
+.sublime_workspace
+.sublime_project
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+*.sqlite3
+*.bak
+*.backup
+
+# Qdrant (local data)
+qdrant_data/
+*.qdrant
+
+# FastAPI/UVicorn
+*.pid
+*.sock
+*.lock
+
+# ============
+# Godot 4
+# ============
+# Godot-specific files
+godot/
+*.translation
+*.tres
+*.res
+*.resource
+*.import
+*.remap
+
+# Godot editor configs
+.editorconfig
+godot_settings/
+mono_crash.*.json
+
+# Godot export templates
+godot-export/
+
+# Godot HTML5 export
+*.html
+*.js
+*.wasm
+*.pck
+*.zip
+
+# ============
+# Data Files
+# ============
+# Local datasets (e.g., CSV, JSON)
+data/*.csv
+data/*.json
+data/*.parquet
+
+# Ranked output (keep this if you want to commit a sample)
+# ranked_output.csv
+
+# ============
+# OS/Editor
+# ============
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.nfs*
+
+# ============
+# Environment Variables
+# ============
+.env
+*.env
+.env.local
+.env*.local
+
+# ============
+# Build Artifacts
+# ============
+*.exe
+*.dll
+*.dylib
+*.so
+*.a
+*.lib
+*.o
+*.obj
+*.bin
+*.app
