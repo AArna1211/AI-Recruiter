@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: ai-recruiter-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - ./data/qdrant_storage:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__API_KEY=your-api-key-here
+    restart: unless-stopped
+    networks:
+      - recruiter-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: ai-recruiter-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis_data:/data
+    restart: unless-stopped
+    networks:
+      - recruiter-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/python/Dockerfile
+    container_name: ai-recruiter-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./data:/data
+      - ./config:/config
+    environment:
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PYTHONPATH=/app
+      - ENVIRONMENT=development
+    depends_on:
+      - qdrant
+      - redis
+    restart: unless-stopped
+    networks:
+      - recruiter-network
+
+  godot:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/godot/Dockerfile
+    container_name: ai-recruiter-godot
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - API_URL=http://backend:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - recruiter-network
+
+networks:
+  recruiter-network:
+    driver: bridge
